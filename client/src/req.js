@@ -1,0 +1,19 @@
+import axios from "axios";
+
+const BASE_URL = `http://localhost:3000/`;
+// const TOKEN =
+//   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
+//     .accessToken || "";
+
+const user = JSON.parse(localStorage.getItem("persist:root"));
+const currentUser = user.currentUser;
+const TOKEN = JSON.parse(currentUser).accessToken;
+
+export const publicRequest = axios.create({
+  baseURL: BASE_URL,
+});
+
+export const userRequest = axios.create({
+  baseURL: BASE_URL,
+  headers: { token: `Bearer ${TOKEN}` },
+});
