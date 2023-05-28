@@ -11,6 +11,12 @@ import AddProduct from "./admin/product/AddProduct";
 import EditProduct from "./admin/product/EditProduct";
 import AddCategory from "./admin/category/AddCategory";
 import AddSubcat from "./admin/subcat/AddSubcat";
+import Admin from "./admin/Admin";
+import GetProducts from "./admin/product/GetProducts";
+import GetCategories from "./admin/category/GetCategories";
+import GetSubcats from "./admin/subcat/GetSubcats";
+import EditCategory from "./admin/category/EditCategory";
+import EditSubCat from "./admin/subcat/EditSubcat";
 
 const Layout = () => {
   return (
@@ -98,21 +104,48 @@ const adminRouter = createBrowserRouter([
         path: "/profile",
         element: <div>U are logged in</div>,
       },
+
       {
-        path: "/admin/addproduct",
-        element: <AddProduct />,
-      },
-      {
-        path: "/admin/editproduct/:id",
-        element: <EditProduct />,
-      },
-      {
-        path: "/admin/addcategory",
-        element: <AddCategory />,
-      },
-      {
-        path: "/admin/addsubcat",
-        element: <AddSubcat />,
+        path: "/admin",
+        element: <Admin />,
+        children: [
+          {
+            path: "addproduct",
+            element: <AddProduct />,
+          },
+          {
+            path: "products",
+            element: <GetProducts />,
+          },
+          {
+            path: "product/:id",
+            element: <EditProduct />,
+          },
+          {
+            path: "addcategory",
+            element: <AddCategory />,
+          },
+          {
+            path: "categories",
+            element: <GetCategories />,
+          },
+          {
+            path: "category/:id",
+            element: <EditCategory />,
+          },
+          {
+            path: "addsubcat",
+            element: <AddSubcat />,
+          },
+          {
+            path: "subcats",
+            element: <GetSubcats />,
+          },
+          {
+            path: "subcat/:id",
+            element: <EditSubCat />,
+          },
+        ],
       },
     ],
   },

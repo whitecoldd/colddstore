@@ -122,7 +122,7 @@ export default function EditProduct() {
   return (
     <div className="mx-40 my-20 flex justify-between">
       <div>
-        <h1 className="font-semibold text-xl mb-10">Edit New Product</h1>
+        <h1 className="font-semibold text-xl mb-10">Edit Product</h1>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col items-start">

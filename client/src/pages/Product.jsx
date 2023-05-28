@@ -1,10 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { publicRequest } from "../req";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { RiScales3Line } from "react-icons/ri";
+import { getRedux } from "../redux/apiCalls";
+import {
+  getCategoryFailure,
+  getCategoryStart,
+  getCategorySuccess,
+} from "../redux/categoryRedux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getSubCatFailure,
+  getSubCatStart,
+  getSubCatSuccess,
+} from "../redux/subcatRedux";
+import { addToCart } from "../redux/cartRedux";
 
 const Product = () => {
   const params = useParams();
+  const dispatch = useDispatch();
+  const cat = useSelector((state) => state.category.categories);
+  const subcat = useSelector((state) => state.subcat.subcats);
   const id = params.id;
+  const [fav, setFav] = useState(false);
   const [qty, setQty] = useState(1);
   const [item, setItem] = useState({});
   const [image, setImage] = useState("");
@@ -20,30 +39,47 @@ const Product = () => {
     };
     getItems();
   }, [id]);
+  useEffect(() => {
+    getRedux(
+      dispatch,
+      getCategoryStart,
+      getCategorySuccess,
+      getCategoryFailure,
+      "category"
+    );
+  }, [dispatch]);
+  useEffect(() => {
+    getRedux(
+      dispatch,
+      getSubCatStart,
+      getSubCatSuccess,
+      getSubCatFailure,
+      "subcat"
+    );
+  }, [dispatch]);
 
   console.log(id);
-  console.log(item);
 
   return (
     <div className="py-5 px-10 flex gap-12 min-h-[70vh]">
       <div className="flex-1 flex gap-3 ">
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-auto max-h-[803px]">
           {item.img?.map((im, i) => (
             <img
               key={i}
               src={im}
               alt=""
-              className="w-full h-36 object-cover cursor-pointer mb-3"
+              className="w-full h-64 object-cover cursor-pointer mb-3"
               onClick={(e) => setImage(e.currentTarget.src)}
             />
           ))}
         </div>
         <div className="flex-3 ">
-          <img src={image} alt="" className="w-full h-[700px] object-cover" />
+          <img src={image} alt="" className="w-full h-[793px] object-cover" />
         </div>
       </div>
-      <div className="flex-1 flex flex-col gap-6">
-        <h1 className="text-4xl">{item.name}</h1>
+      <div className="flex-1 flex flex-col gap-6 items-start">
+        <h1 className="text-4xl font-bold">{item.name}</h1>
         <span className="text-3xl text-teal-500 font-medium">
           ${item.price}
         </span>
@@ -73,32 +109,68 @@ const Product = () => {
             +
           </button>
         </div>
-        <button className="relative px-6 py-3 font-bold text-black group mt-10 mb-5">
+        <button
+          onClick={() =>
+            dispatch(
+              addToCart({
+                id: item._id,
+                name: item.name,
+                img: item.img,
+                price: item.price,
+                qty: qty,
+                quantity: qty,
+              })
+            )
+          }
+          className="relative px-10 py-3 font-bold text-black group mt-10 mb-5"
+        >
           <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-teal-400 group-hover:translate-x-0 group-hover:translate-y-0"></span>
           <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
           <span className="relative">ADD TO CART</span>
         </button>
-        {/* <div className="links">
-          <div className="item">
-            <FavoriteBorderIcon /> ADD TO WISH LIST
-          </div>
-          <div className="item">
-            <BalanceIcon /> ADD TO COMPARE
-          </div>
+        <div className="flex items-center gap-5">
+          <button
+            onClick={() => setFav(!fav)}
+            className="flex items-center gap-3 text-teal-700"
+          >
+            {!fav ? (
+              <AiOutlineHeart className="text-3xl" />
+            ) : (
+              <AiFillHeart className="text-3xl" />
+            )}
+            ADD TO WISH LIST
+          </button>
+          <button className="flex items-center gap-3 text-teal-700">
+            <RiScales3Line className="text-3xl" /> ADD TO COMPARE
+          </button>
         </div>
-        <div className="info">
-          <span>Vendor: Polo</span>
-          <span>Product Type: T-Shirt</span>
-          <span>Tag: T-Shirt, Women, Top</span>
+        <div className="text-slate-500 font-medium flex flex-col gap-2">
+          <h3>Vendor: {item?.vendor}</h3>
+          <h3>
+            Type:{" "}
+            {subcat
+              .filter((sub) => sub._id === item.subcat)
+              .map((sub) => sub.name)}
+          </h3>
+          <h3>
+            Tags:{" "}
+            {cat
+              .filter((sub) => sub._id === item.category)
+              .map((sub) => sub.name)}
+            ,{" "}
+            {subcat
+              .filter((sub) => sub._id === item.subcat)
+              .map((sub) => sub.name)}
+          </h3>
         </div>
-        <hr />
-        <div className="info">
-          <span>DESCRIPTION</span>
-          <hr />
-          <span>ADDITIONAL INFORMATION</span>
-          <hr />
-          <span>FAQ</span>
-        </div> */}
+        <hr className="h-[2px] bg-gray-400 border-0 w-full" />
+        <div className="font-medium text-slate-500 flex flex-col gap-2">
+          <div className="uppercase">Description</div>
+          <hr className="h-[2px] bg-gray-400 border-0" />
+          <div className="uppercase">Additional Info</div>
+          <hr className="h-[2px] bg-gray-400 border-0" />
+          <div className="uppercase">FAQ</div>
+        </div>
       </div>
     </div>
   );

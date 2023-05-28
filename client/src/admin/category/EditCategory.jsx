@@ -1,4 +1,4 @@
-import { addRedux, updateRedux } from "../../redux/apiCalls";
+import { updateRedux } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import app from "../../firebase";
@@ -9,9 +9,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import {
-  addCategoryFailure,
-  addCategoryStart,
-  addCategorySuccess,
+  updateCategoryFailure,
+  updateCategoryStart,
+  updateCategorySuccess,
 } from "../../redux/categoryRedux";
 
 export default function EditCategory() {
@@ -61,9 +61,9 @@ export default function EditCategory() {
     updateRedux(
       category,
       dispatch,
-      EditCategoryStart,
-      EditCategorySuccess,
-      EditCategoryFailure,
+      updateCategoryStart,
+      updateCategorySuccess,
+      updateCategoryFailure,
       "category"
     );
   };
@@ -77,7 +77,7 @@ export default function EditCategory() {
 
   return (
     <div className="mx-40 my-20">
-      <h1 className="font-semibold text-xl">Edit New Category</h1>
+      <h1 className="font-semibold text-xl">Edit Category</h1>
 
       <div>
         <form onSubmit={handleSubmit}>

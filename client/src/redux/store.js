@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
+import cartReducer from "./cartRedux";
 import productReducer from "./productRedux";
 import categoryReducer from "./categoryRedux";
 import subcatReducer from "./subcatRedux";
@@ -21,16 +22,17 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
 const rootReducer = combineReducers({
-  user: persistedReducer,
+  user: userReducer,
+  cart: cartReducer,
+  product: productReducer,
   category: categoryReducer,
   subcat: subcatReducer,
-  product: productReducer,
 });
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

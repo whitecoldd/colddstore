@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { useParams } from "react-router-dom";
 import { publicRequest } from "../req";
+import { Range } from "react-range";
 
 const Category = () => {
   const catId = useParams().id;
-  const [maxPrice, setMaxPrice] = useState(250);
   const [sort, setSort] = useState(false);
   const [data, setData] = useState([]);
   const [cat, setCat] = useState({});
   const [subCat, setSubCat] = useState([]);
-
+  const [state, setState] = useState({ values: [25, 100] });
   console.log(catId);
   useEffect(() => {
     const getItems = async () => {
@@ -69,7 +69,7 @@ const Category = () => {
   };
   console.log(sort);
   return (
-    <div className="py-8 px-12 flex">
+    <div className="py-8 px-10 flex gap-3">
       <div className="flex-1 sticky h-full top-12 ">
         <div className="mb-8">
           <h2 className="font-normal mb-5">Product Categories</h2>
@@ -89,16 +89,53 @@ const Category = () => {
         </div>
         <div className="mb-8">
           <h2 className="font-normal mb-5">Filter by price</h2>
-          <div className="mb-3">
-            <span>0</span>
-            <input
+          <div className="mb-3 flex items-center gap-2">
+            <span>{state.values[0]}</span>
+            {/* <input
               type="range"
               min={0}
               max={250}
               step={10}
+              value={maxPrice}
               onChange={(e) => setMaxPrice(e.target.value)}
-            />
-            <span>{maxPrice}</span>
+            /> */}
+            <div className="w-1/2">
+              <Range
+                step={5}
+                min={0}
+                max={250}
+                allowOverlap={false}
+                values={state.values}
+                onChange={(values) => setState({ values })}
+                renderTrack={({ props, children }) => (
+                  <div
+                    {...props}
+                    style={{
+                      ...props.style,
+                      height: "6px",
+                      width: "100%",
+                      backgroundColor: "#0d9488",
+                      borderRadius: "10px"
+                    }}
+                  >
+                    {children}
+                  </div>
+                )}
+                renderThumb={({ props }) => (
+                  <div
+                    {...props}
+                    style={{
+                      ...props.style,
+                      height: "10px",
+                      width: "10px",
+                      borderRadius: "50%",
+                      backgroundColor: "#0d9488",
+                    }}
+                  />
+                )}
+              />
+            </div>
+            <span>{state.values[1]}</span>
           </div>
         </div>
         <div className="mb-8">
@@ -138,7 +175,10 @@ const Category = () => {
         </div>
         <div className="flex justify-start gap-10 flex-wrap min-h-[500px]">
           {data
-            ?.filter((item) => item.price <= maxPrice)
+            ?.filter(
+              (item) =>
+                item.price <= state.values[1] && item.price >= state.values[0]
+            )
             .filter((item) =>
               Check.length === 0 ? item.subcat : Check.includes(item.subcat)
             )
