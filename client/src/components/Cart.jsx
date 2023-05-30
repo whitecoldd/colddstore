@@ -12,7 +12,7 @@ const Cart = () => {
   const totalPrice = () => {
     let total = 0;
     products.forEach((item) => {
-      total += item.qty * item.price;
+      total += item.quantity * item.price;
     });
     return total.toFixed(2);
   };
@@ -55,7 +55,7 @@ const Cart = () => {
                   {item?.desc?.substring(0, 100)}
                 </p>
                 <div className="text-teal-700">
-                  {item.qty} x ${item.price}
+                  {item.quantity} x ${item.price}
                 </div>
               </div>
               <MdDeleteForever

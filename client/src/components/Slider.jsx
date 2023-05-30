@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 export default function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const [imgs, setImgs] = useState([
+  const imgs = [
     {
       id: 0,
       img: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg",
@@ -18,24 +17,21 @@ export default function Slider() {
       id: 2,
       img: "https://images.pexels.com/photos/991202/pexels-photo-991202.jpeg",
     },
-  ]);
+  ];
 
   const prevSlide = () => {
     setCurrentSlide(currentSlide === 0 ? 2 : (prev) => prev - 1);
   };
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide === 2 ? 0 : (prev) => prev + 1);
-  };
-  // useEffect(() => {
-  //   const runSlider = (slide) => {
-  //     setInterval(
-  //       () => setCurrentSlide(slide === 2 ? 0 : (prev) => prev + 1),
-  //       5000
-  //     );
-  //     console.log(currentSlide);
-  //   };
-  //   runSlider(currentSlide);
-  // }, [currentSlide]);
+  const nextSlide = useCallback(() => {
+    setCurrentSlide(currentSlide === imgs.length - 1 ? 0 : (prev) => prev + 1);
+  }, [currentSlide, imgs.length]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [nextSlide]);
 
   return (
     <div className="relative overflow-hidden h-[calc(100vh_-_80px] w-full">

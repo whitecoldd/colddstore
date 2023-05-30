@@ -37,7 +37,7 @@ const Featured = ({ type }) => {
           illum doloribus.
         </p>
       </div>
-      <div className="mx-28 flex gap-10">
+      <div className="mx-28 flex gap-10 overflow-x-auto">
         {products.map((product) => (
           <div key={product._id}>
             <Card item={product} />

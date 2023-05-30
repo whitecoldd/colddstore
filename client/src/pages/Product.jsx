@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { publicRequest } from "../req";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { RiScales3Line } from "react-icons/ri";
 import { getRedux } from "../redux/apiCalls";
 import {
   getCategoryFailure,
@@ -16,14 +15,16 @@ import {
   getSubCatSuccess,
 } from "../redux/subcatRedux";
 import { addToCart } from "../redux/cartRedux";
+import { addToWishlist, removeFromWishlist } from "../redux/wishlistRedux";
 
+// eslint-disable-next-line react/prop-types
 const Product = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const cat = useSelector((state) => state.category.categories);
   const subcat = useSelector((state) => state.subcat.subcats);
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
   const id = params.id;
-  const [fav, setFav] = useState(false);
   const [qty, setQty] = useState(1);
   const [item, setItem] = useState({});
   const [image, setImage] = useState("");
@@ -58,24 +59,24 @@ const Product = () => {
     );
   }, [dispatch]);
 
-  console.log(id);
+  console.log(wishlist);
 
   return (
     <div className="py-5 px-10 flex gap-12 min-h-[70vh]">
       <div className="flex-1 flex gap-3 ">
-        <div className="flex-1 overflow-y-auto max-h-[803px]">
+        <div className="flex-1 overflow-y-auto max-h-[803px] flex flex-col gap-2">
           {item.img?.map((im, i) => (
             <img
               key={i}
               src={im}
               alt=""
-              className="w-full h-64 object-cover cursor-pointer mb-3"
+              className="w-full h-64 object-cover cursor-pointer"
               onClick={(e) => setImage(e.currentTarget.src)}
             />
           ))}
         </div>
         <div className="flex-3 ">
-          <img src={image} alt="" className="w-full h-[793px] object-cover" />
+          <img src={image} alt="" className="w-full h-[785px] object-cover" />
         </div>
       </div>
       <div className="flex-1 flex flex-col gap-6 items-start">
@@ -117,7 +118,6 @@ const Product = () => {
                 name: item.name,
                 img: item.img,
                 price: item.price,
-                qty: qty,
                 quantity: qty,
               })
             )
@@ -129,20 +129,29 @@ const Product = () => {
           <span className="relative">ADD TO CART</span>
         </button>
         <div className="flex items-center gap-5">
-          <button
-            onClick={() => setFav(!fav)}
-            className="flex items-center gap-3 text-teal-700"
-          >
-            {!fav ? (
-              <AiOutlineHeart className="text-3xl" />
-            ) : (
+          {wishlist.some((el) => {
+            if (el._id === item._id) {
+              return true;
+            }
+
+            return false;
+          }) ? (
+            <button
+              onClick={() => dispatch(removeFromWishlist(item._id))}
+              className="flex items-center gap-3 text-teal-700"
+            >
               <AiFillHeart className="text-3xl" />
-            )}
-            ADD TO WISH LIST
-          </button>
-          <button className="flex items-center gap-3 text-teal-700">
-            <RiScales3Line className="text-3xl" /> ADD TO COMPARE
-          </button>
+              REMOVE FROM WISH LIST
+            </button>
+          ) : (
+            <button
+              onClick={() => dispatch(addToWishlist(item))}
+              className="flex items-center gap-3 text-teal-700"
+            >
+              <AiOutlineHeart className="text-3xl" />
+              ADD TO WISH LIST
+            </button>
+          )}
         </div>
         <div className="text-slate-500 font-medium flex flex-col gap-2">
           <h3>Vendor: {item?.vendor}</h3>

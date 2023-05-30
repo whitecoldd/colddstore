@@ -75,7 +75,7 @@ const Footer = () => {
 
           <span> &copy; Copyright 2023, All Right Reserved </span>
         </div>
-        <div className="shadow-lg overflow-hidden mb-2">
+        <div className="overflow-hidden mb-2">
           <img src="/payment.png" />
         </div>
       </div>

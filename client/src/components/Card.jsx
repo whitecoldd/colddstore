@@ -8,7 +8,7 @@ const Card = ({ item }) => {
   return (
     // eslint-disable-next-line react/prop-types
     <Link className="link" to={`/product/${item._id}`}>
-      <div className="w-72 flex flex-col gap-2 mb-12">
+      <div className="w-72 flex flex-col gap-2">
         <div className="w-full h-96 overflow-hidden relative">
           {/* {item?.attributes.isNew && <span>New Season</span>} */}
           <img

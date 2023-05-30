@@ -17,6 +17,7 @@ import GetCategories from "./admin/category/GetCategories";
 import GetSubcats from "./admin/subcat/GetSubcats";
 import EditCategory from "./admin/category/EditCategory";
 import EditSubCat from "./admin/subcat/EditSubcat";
+import Wishlist from "./pages/Wishlist";
 
 const Layout = () => {
   return (
@@ -28,129 +29,6 @@ const Layout = () => {
   );
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/category/:id",
-        element: <Category />,
-      },
-      {
-        path: "/product/:id",
-        element: <Product />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-    ],
-  },
-]);
-const authRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/category/:id",
-        element: <Category />,
-      },
-      {
-        path: "/product/:id",
-        element: <Product />,
-      },
-      {
-        path: "/profile",
-        element: <div>U are logged in</div>,
-      },
-    ],
-  },
-]);
-const adminRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/category/:id",
-        element: <Category />,
-      },
-      {
-        path: "/product/:id",
-        element: <Product />,
-      },
-      {
-        path: "/profile",
-        element: <div>U are logged in</div>,
-      },
-
-      {
-        path: "/admin",
-        element: <Admin />,
-        children: [
-          {
-            path: "addproduct",
-            element: <AddProduct />,
-          },
-          {
-            path: "products",
-            element: <GetProducts />,
-          },
-          {
-            path: "product/:id",
-            element: <EditProduct />,
-          },
-          {
-            path: "addcategory",
-            element: <AddCategory />,
-          },
-          {
-            path: "categories",
-            element: <GetCategories />,
-          },
-          {
-            path: "category/:id",
-            element: <EditCategory />,
-          },
-          {
-            path: "addsubcat",
-            element: <AddSubcat />,
-          },
-          {
-            path: "subcats",
-            element: <GetSubcats />,
-          },
-          {
-            path: "subcat/:id",
-            element: <EditSubCat />,
-          },
-        ],
-      },
-    ],
-  },
-]);
-
 function App() {
   const user = useSelector((state) => state.user.currentUser);
   const admin = useSelector((state) => state.user.currentUser?.isAdmin);
@@ -159,6 +37,137 @@ function App() {
     else if (user) return authRouter;
     else return router;
   };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/category/:id",
+          element: <Category />,
+        },
+        {
+          path: "/product/:id",
+          element: <Product />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+      ],
+    },
+  ]);
+  const authRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/category/:id",
+          element: <Category />,
+        },
+        {
+          path: "/product/:id",
+          element: <Product />,
+        },
+        {
+          path: "/wishlist",
+          element: <Wishlist />,
+        },
+        {
+          path: "/profile",
+          element: <div>U are logged in</div>,
+        },
+      ],
+    },
+  ]);
+  const adminRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/category/:id",
+          element: <Category />,
+        },
+        {
+          path: "/product/:id",
+          element: <Product />,
+        },
+        {
+          path: "/profile",
+          element: <div>U are logged in</div>,
+        },
+        {
+          path: "/wishlist",
+          element: <Wishlist />,
+        },
+
+        {
+          path: "/admin",
+          element: <Admin />,
+          children: [
+            {
+              path: "addproduct",
+              element: <AddProduct />,
+            },
+            {
+              path: "products",
+              element: <GetProducts />,
+            },
+            {
+              path: "product/:id",
+              element: <EditProduct />,
+            },
+            {
+              path: "addcategory",
+              element: <AddCategory />,
+            },
+            {
+              path: "categories",
+              element: <GetCategories />,
+            },
+            {
+              path: "category/:id",
+              element: <EditCategory />,
+            },
+            {
+              path: "addsubcat",
+              element: <AddSubcat />,
+            },
+            {
+              path: "subcats",
+              element: <GetSubcats />,
+            },
+            {
+              path: "subcat/:id",
+              element: <EditSubCat />,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
   return (
     <>
       <RouterProvider router={check()} />

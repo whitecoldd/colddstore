@@ -4,6 +4,7 @@ import cartReducer from "./cartRedux";
 import productReducer from "./productRedux";
 import categoryReducer from "./categoryRedux";
 import subcatReducer from "./subcatRedux";
+import wishlistReducer from "./wishlistRedux";
 import {
   persistStore,
   persistReducer,
@@ -25,6 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
+  wishlist: wishlistReducer,
   product: productReducer,
   category: categoryReducer,
   subcat: subcatReducer,
