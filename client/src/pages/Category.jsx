@@ -111,6 +111,7 @@ const Category = () => {
                   <div
                     {...props}
                     style={{
+                      // eslint-disable-next-line react/prop-types
                       ...props.style,
                       height: "6px",
                       width: "100%",
@@ -125,6 +126,7 @@ const Category = () => {
                   <div
                     {...props}
                     style={{
+                      // eslint-disable-next-line react/prop-types
                       ...props.style,
                       height: "10px",
                       width: "10px",

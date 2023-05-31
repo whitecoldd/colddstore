@@ -18,6 +18,8 @@ import GetSubcats from "./admin/subcat/GetSubcats";
 import EditCategory from "./admin/category/EditCategory";
 import EditSubCat from "./admin/subcat/EditSubcat";
 import Wishlist from "./pages/Wishlist";
+import Success from "./pages/Success";
+import Error from "./pages/Error";
 
 const Layout = () => {
   return (
@@ -90,6 +92,14 @@ function App() {
           element: <Wishlist />,
         },
         {
+          path: "/success",
+          element: <Success />,
+        },
+        {
+          path: "/error",
+          element: <Error />,
+        },
+        {
           path: "/profile",
           element: <div>U are logged in</div>,
         },
@@ -105,6 +115,14 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/success",
+          element: <Success />,
+        },
+        {
+          path: "/error",
+          element: <Error />,
         },
         {
           path: "/category/:id",
