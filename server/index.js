@@ -14,7 +14,7 @@ const cors = require("cors");
 //configs and connections
 dotenv.config();
 connectDB();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 //routes
