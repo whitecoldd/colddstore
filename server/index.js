@@ -14,26 +14,20 @@ const cors = require("cors");
 //configs and connections
 dotenv.config();
 connectDB();
-app.use(
-  cors({
-    origin: [
-      "https://colddstore.onrender.com",
-      "https://colddstore.netlify.app",
-    ],
-  })
-);
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://colddstore.netlify.app"
+app.use(cors());
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
   );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
-app.use(express.json());
 
 //routes
+
 app.use("/api/auth", authRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/subcat", subcatRoute);
