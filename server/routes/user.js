@@ -8,9 +8,9 @@ const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 
 router.put("/:id", verifyTokenAndAuthor, async (req, res) => {
-  if (req.body.password) {
-    req.body.password = CryptoJS.AES.encrypt(
-      req.body.password,
+  if (req.body.psw) {
+    req.body.psw = CryptoJS.AES.encrypt(
+      req.body.psw,
       process.env.CRYPT_SECRET
     ).toString();
   }

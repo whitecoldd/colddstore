@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
+app.use(express.json());
 //routes
 
 app.use("/api/auth", authRoute);
