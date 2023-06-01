@@ -14,7 +14,7 @@ const cors = require("cors");
 //configs and connections
 dotenv.config();
 connectDB();
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: ["https://colddstore.onrender.com/", "https://colddstore.netlify.app/",] }));
 app.use(express.json());
 
 //routes
