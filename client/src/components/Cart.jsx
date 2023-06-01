@@ -1,11 +1,13 @@
 import { MdDeleteForever } from "react-icons/md";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { userRequest } from "../req";
 
-const Cart = () => {
+// eslint-disable-next-line react/prop-types
+const Cart = ({ setCartOpen }) => {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
 
@@ -35,8 +37,13 @@ const Cart = () => {
     }
   };
   return (
-    <div className="absolute right-5 top-20 z-50 bg-white p-16 shadow-2xl">
-      <h1 className="mb-7 text-gray-500 text-2xl">Products in your cart</h1>
+    <div className="absolute right-0 lg:right-5 top-20 min-w-[250px] z-[300] bg-white py-6 px-3 lg:p-12 shadow-2xl">
+      <div className="flex justify-between items-start">
+        <h1 className="mb-7 text-gray-500 text-2xl">Products in your cart</h1>
+        <button className={`lg:hidden text-3xl`} onClick={() => setCartOpen(false)}>
+          <AiOutlineCloseSquare />
+        </button>
+      </div>
       <div className="max-h-[350px] overflow-y-auto">
         {products?.map((item) => (
           <div

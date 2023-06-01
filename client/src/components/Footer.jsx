@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="mx-40 flex flex-col gap-10 mt-20">
-      <div className="grid grid-flow-col grid-cols-4 gap-8">
+    <div className="lg:mx-40 mx-5 flex flex-col gap-10 mt-20">
+      <div className="grid grid-flow-col lg:grid-cols-4 grid-cols-2 grid-rows-2 lg:grid-rows-1 gap-8">
         <div>
           <h2 className="text-lg font-bold">Categories</h2>
           <div className="leading-6">
@@ -66,7 +66,7 @@ const Footer = () => {
           </h3>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex flex-col lg:flex-row justify-between">
         <div className="flex flex-col justify-center gap-2">
           <Link to={"/"} className="font-burtons text-2xl text-teal-600">
             colddstore{" "}
@@ -75,7 +75,7 @@ const Footer = () => {
 
           <span> &copy; Copyright 2023, All Right Reserved </span>
         </div>
-        <div className="overflow-hidden mb-2">
+        <div className="overflow-hidden my-2">
           <img src="/payment.png" />
         </div>
       </div>

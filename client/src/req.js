@@ -6,7 +6,8 @@ const BASE_URL = `http://localhost:3000/`;
 //     .accessToken || "";
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
-const TOKEN = JSON.parse(user)?.currentUser.accessToken;
+const TOKEN = JSON.parse(user)?.currentUser?.accessToken;
+console.log(TOKEN)
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,

@@ -23,21 +23,20 @@ const Featured = ({ type }) => {
       "product"
     );
   }, [dispatch]);
-  console.log(products);
   return (
-    <div className="mx-40 my-10">
-      <div className="flex align-center justify-between mb-12">
-        <h1 className="flex-2 capitalize font-bold text-3xl">
+    <div className="lg:mx-40 mx-2 my-10">
+      <div className="flex align-center justify-center  lg:justify-between mb-12">
+        <h1 className="lg:flex-2 capitalize font-bold text-3xl">
           {type} products
         </h1>
-        <p className="flex-3 text-gray-700">
+        <p className="hidden lg:flex-3 lg:block text-gray-700">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem
           temporibus cumque quidem quaerat nesciunt assumenda ut. Obcaecati
           quidem ea libero iste rerum, sapiente quis at totam cumque officia
           illum doloribus.
         </p>
       </div>
-      <div className="mx-28 flex gap-10 overflow-x-auto">
+      <div className="lg:mx-28 flex gap-10 overflow-x-auto">
         {products.map((product) => (
           <div key={product._id}>
             <Card item={product} />

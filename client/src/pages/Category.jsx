@@ -11,7 +11,6 @@ const Category = () => {
   const [cat, setCat] = useState({});
   const [subCat, setSubCat] = useState([]);
   const [state, setState] = useState({ values: [25, 100] });
-  console.log(catId);
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -52,7 +51,6 @@ const Category = () => {
   const handleCheck = (e) => {
     if (e.target.checked) {
       setCheck([...Check, e.target.value]);
-      console.log(Check);
     } else {
       setCheck(Check.filter((id) => id !== e.target.value));
     }
@@ -67,10 +65,9 @@ const Category = () => {
       setData(sorted);
     }
   };
-  console.log(sort);
   return (
-    <div className="py-8 px-10 flex gap-3">
-      <div className="flex-1 sticky h-full top-12 ">
+    <div className="py-8 px-10 flex lg:flex-row flex-col gap-3">
+      <div className="flex-1 lg:sticky h-full top-12">
         <div className="mb-8">
           <h2 className="font-normal mb-5">Product Categories</h2>
           {subCat?.map((item) => (
@@ -91,14 +88,6 @@ const Category = () => {
           <h2 className="font-normal mb-5">Filter by price</h2>
           <div className="mb-3 flex items-center gap-2">
             <span>{state.values[0]}</span>
-            {/* <input
-              type="range"
-              min={0}
-              max={250}
-              step={10}
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-            /> */}
             <div className="w-1/2">
               <Range
                 step={5}
@@ -116,7 +105,7 @@ const Category = () => {
                       height: "6px",
                       width: "100%",
                       backgroundColor: "#0d9488",
-                      borderRadius: "10px"
+                      borderRadius: "10px",
                     }}
                   >
                     {children}
@@ -175,7 +164,7 @@ const Category = () => {
             {cat.name}
           </h1>
         </div>
-        <div className="flex justify-start gap-10 flex-wrap min-h-[500px]">
+        <div className="flex justify-center lg:justify-start gap-10 flex-wrap min-h-[500px]">
           {data
             ?.filter(
               (item) =>

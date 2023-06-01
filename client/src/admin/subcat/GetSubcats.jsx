@@ -40,7 +40,18 @@ const GetSubcats = () => {
   };
 
   return (
-    <div className="container my-12 mx-auto px-4 md:px-12">
+    <div className="container my-12 mx-auto px-4 md:px-12 relative">
+      <div className="absolute right-0 top-0">
+        <Link
+          to={`/admin/addsubcat`}
+          className="relative px-6 py-3 font-bold text-black group mt-10 mb-5 mr-5"
+        >
+          <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-teal-400 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+          <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+          <span className="relative">Add new subcategory</span>
+        </Link>
+      </div>
+
       <div className="flex flex-wrap -mx-1 lg:-mx-4">
         {subcats.map((cat) => (
           <>
@@ -59,6 +70,7 @@ const GetSubcats = () => {
                 className="hover:text-red-600 text-3xl absolute border z-20 cursor-pointer border-white hover:bg-white bg-red-500 text-white top-1   right-5"
               />
             </article>
+
             {toggle && (
               <Toggle
                 onDelete={handleDelete}

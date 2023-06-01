@@ -8,6 +8,7 @@ const categoryRoute = require("./routes/category");
 const subcatRoute = require("./routes/subcat");
 const productRoute = require("./routes/product");
 const stripeRoute = require("./routes/stripe");
+const userRoute = require("./routes/user");
 const cors = require("cors");
 
 //configs and connections
@@ -22,6 +23,7 @@ app.use("/api/category", categoryRoute);
 app.use("/api/subcat", subcatRoute);
 app.use("/api/product", productRoute);
 app.use("/api/checkout", stripeRoute);
+app.use("/api/user", userRoute);
 
 //driver
 app.listen(process.env.PORT || 3000, () => {

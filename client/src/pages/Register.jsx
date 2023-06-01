@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { publicRequest } from "../req";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -21,12 +21,12 @@ export default function Register() {
     }
   };
   return (
-    <div className="mx-40 my-36">
+    <div className="lg:mx-40 my-36">
       <div className="text-center mb-10">
         <h1 className="font-semibold text-3xl">Register</h1>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-        <div className="flex gap-10 justify-center">
+        <div className="flex gap-10 flex-wrap justify-center">
           <div className="flex flex-col items-center gap-4">
             <input
               name="username"
@@ -83,6 +83,12 @@ export default function Register() {
           <span className="relative">Submit</span>
         </button>
       </form>
+      <div className="flex justify-center gap-1">
+        <h1>Already have an account?</h1>
+        <Link to={"/login"} className="font-medium text-teal-500">
+          Login
+        </Link>
+      </div>
     </div>
   );
 }

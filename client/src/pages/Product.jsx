@@ -59,7 +59,6 @@ const Product = () => {
     );
   }, [dispatch]);
 
-  console.log(wishlist);
 
   return (
     <div className="py-5 px-10 flex gap-12 min-h-[70vh]">

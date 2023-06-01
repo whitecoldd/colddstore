@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { publicRequest } from "../req";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userRedux";
 
@@ -20,14 +20,14 @@ export default function Register() {
     try {
       const res = await publicRequest.post(`/api/auth/login`, inputs);
       dispatch(loginSuccess(res.data));
-      navigate('/')
+      navigate("/");
     } catch (e) {
       dispatch(loginFailure());
       console.log(e);
     }
   };
   return (
-    <div className="mx-40 my-36">
+    <div className="lg:mx-40 my-36">
       <div className="text-center mb-10">
         <h1 className="font-semibold text-3xl">Login</h1>
       </div>
@@ -60,6 +60,12 @@ export default function Register() {
           <span className="relative">Submit</span>
         </button>
       </form>
+      <div className="flex justify-center gap-1 mt-5 flex-wrap w-full">
+        <h1>Don&apos;t have an account?</h1>
+        <Link to={"/register"} className="font-medium text-teal-500">
+          Register
+        </Link>
+      </div>
     </div>
   );
 }

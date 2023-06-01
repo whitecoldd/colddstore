@@ -20,6 +20,7 @@ import EditSubCat from "./admin/subcat/EditSubcat";
 import Wishlist from "./pages/Wishlist";
 import Success from "./pages/Success";
 import Error from "./pages/Error";
+import Profile from "./pages/Profile";
 
 const Layout = () => {
   return (
@@ -101,7 +102,7 @@ function App() {
         },
         {
           path: "/profile",
-          element: <div>U are logged in</div>,
+          element: <Profile />,
         },
       ],
     },
@@ -134,7 +135,7 @@ function App() {
         },
         {
           path: "/profile",
-          element: <div>U are logged in</div>,
+          element: <Profile />,
         },
         {
           path: "/wishlist",

@@ -22,7 +22,7 @@ const CatGrid = () => {
   }, [dispatch]);
 
   return (
-    <div className="grid grid-cols-3 grid-rows-2 h-[80vh] gap-2 m-2">
+    <div className="grid lg:grid-cols-3 grid-cols-2 lg:grid-rows-2 h-[80vh] gap-2 m-2">
       {category.map((cat, i) => (
         <CatCard key={i} cat={cat} category={category} index={i} />
       ))}

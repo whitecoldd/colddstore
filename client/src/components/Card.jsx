@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const Card = ({ item }) => {
-  console.log(item);
   return (
     // eslint-disable-next-line react/prop-types
     <Link className="link" to={`/product/${item._id}`}>
