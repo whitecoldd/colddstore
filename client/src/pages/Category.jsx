@@ -10,7 +10,7 @@ const Category = () => {
   const [data, setData] = useState([]);
   const [cat, setCat] = useState({});
   const [subCat, setSubCat] = useState([]);
-  const [state, setState] = useState({ values: [25, 100] });
+  const [state, setState] = useState({ values: [0, 250] });
   useEffect(() => {
     const getItems = async () => {
       try {
