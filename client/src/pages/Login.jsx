@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { publicRequest } from "../req";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userRedux";
 
 export default function Register() {
@@ -13,7 +13,7 @@ export default function Register() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  const { isFetching } = useSelector((state) => state.user);
+  // const { isFetching } = useSelector((state) => state.user);
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
@@ -53,7 +53,7 @@ export default function Register() {
         <button
           type="submit"
           className="relative px-6 py-3 font-bold text-black group mt-10"
-          disabled={isFetching}
+          // disabled={isFetching}
         >
           <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-teal-400 group-hover:translate-x-0 group-hover:translate-y-0"></span>
           <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
