@@ -7,15 +7,15 @@ export default function Slider() {
   const imgs = [
     {
       id: 0,
-      img: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg",
+      img: "https://images.pexels.com/photos/13991662/pexels-photo-13991662.jpeg",
     },
     {
       id: 1,
-      img: "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg",
+      img: "https://images.pexels.com/photos/757279/pexels-photo-757279.jpeg",
     },
     {
       id: 2,
-      img: "https://images.pexels.com/photos/991202/pexels-photo-991202.jpeg",
+      img: "https://images.pexels.com/photos/11302429/pexels-photo-11302429.jpeg",
     },
   ];
 
@@ -25,6 +25,7 @@ export default function Slider() {
   const nextSlide = useCallback(() => {
     setCurrentSlide(currentSlide === imgs.length - 1 ? 0 : (prev) => prev + 1);
   }, [currentSlide, imgs.length]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
@@ -34,7 +35,7 @@ export default function Slider() {
   }, [nextSlide]);
 
   return (
-    <div className="relative overflow-hidden h-[calc(100vh_-_80px] w-full">
+    <div className="relative overflow-hidden h-[92vh] w-full">
       <div
         className="flex transition-all overflow-hidden duration-300 ease-in-out w-[300vw] h-full"
         style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
